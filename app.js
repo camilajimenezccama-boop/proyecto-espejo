@@ -41,6 +41,36 @@ function pintarTareas() {
   // TODO: Configurar las clases CSS según la prioridad y el estado (completada)
   // TODO: Añadir un botón dentro de cada <li> para poder alternar el estado (Completada/Pendiente)
   // TODO: Inyectar el <li> resultante en listaContenedor usando .appendChild()
+    listaContenedor.innerHTML = '';
+
+  const tareasFiltradas = tareas.filter(tarea => {
+    if (filtroActual === 'Pendientes') {
+      return !tarea.completada;
+    }
+
+    if (filtroActual === 'Completadas') {
+      return tarea.completada;
+    }
+
+    return true;
+  });
+
+  tareasFiltradas.forEach(tarea => {
+    const li = document.createElement('li');
+    li.classList.add('item-tarea', tarea.prioridad);
+
+    if (tarea.completada) {
+      li.classList.add('completada');
+    }
+
+    const texto = document.createElement('span');
+    texto.textContent = tarea.titulo;
+
+    li.appendChild(texto);
+    listaContenedor.appendChild(li);
+  });
+
+
 }
 
 // 5. MANEJO DE EVENTOS: Captura de formulario
