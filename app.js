@@ -81,6 +81,30 @@ formulario.addEventListener('submit', (event) => {
   // TODO: Crear un nuevo objeto tarea inmutable con un id único (Date.now())
   // TODO: Añadir el objeto al array global de tareas de forma inmutable (operador spread)
   // TODO: Volver a invocar pintarTareas() y resetear el formulario
+    event.preventDefault();
+
+  const titulo = inputTitulo.value.trim();
+  const prioridad = selectPrioridad.value;
+
+  if (titulo === '') {
+    return;
+  }
+
+  const nuevaTarea = {
+    id: Date.now(),
+    titulo: titulo,
+    prioridad: prioridad,
+    completada: false
+  };
+
+  tareas = [...tareas, nuevaTarea];
+
+  pintarTareas();
+
+  formulario.reset();
+  inputTitulo.focus();
+
+
 });
 
 // 6. MANEJO DE EVENTOS: Captura de botones de filtrado
