@@ -66,8 +66,33 @@ function pintarTareas() {
     const texto = document.createElement('span');
     texto.textContent = tarea.titulo;
 
+    
+    const botonEstado = document.createElement('button');
+
+    botonEstado.type = 'button';
+    botonEstado.textContent = tarea.completada
+    ? 'Marcar pendiente'
+    : 'Completar';
+
+    botonEstado.addEventListener('click', () => {
+    tareas = tareas.map(tareaActual => {
+        if (tareaActual.id === tarea.id) {
+        return {
+            ...tareaActual,
+            completada: !tareaActual.completada
+        };
+        }
+
+        return tareaActual;
+    });
+
+    pintarTareas();
+    });
+
     li.appendChild(texto);
+    li.appendChild(botonEstado);
     listaContenedor.appendChild(li);
+
   });
 
 
