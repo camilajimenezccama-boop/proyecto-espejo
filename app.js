@@ -110,12 +110,17 @@ formulario.addEventListener('submit', (event) => {
 // 6. MANEJO DE EVENTOS: Captura de botones de filtrado
 botonesFiltro.forEach(boton => {
   boton.addEventListener('click', (event) => {
-    // Quitar clase active al botón anterior y ponérsela al pulsado
-    document.querySelector('.btn-filtro.active').classList.remove('active');
-    event.target.classList.add('active');
+    const botonActivo = document.querySelector('.btn-filtro.active');
 
-    // TODO: Actualizar la variable 'filtroActual' con el atributo 'data-filtro' del botón
-    // TODO: Invocar pintarTareas() para refrescar la pantalla
+    if (botonActivo) {
+      botonActivo.classList.remove('active');
+    }
+
+    event.currentTarget.classList.add('active');
+
+    filtroActual = event.currentTarget.dataset.filtro;
+
+    pintarTareas();
   });
 });
 
